@@ -14,6 +14,20 @@
 		EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */; };
 		EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */; };
 		EB5889032B6C087A00F679C5 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */; };
+		EB5889072B6C0FC800F679C5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889062B6C0FC800F679C5 /* NetworkManager.swift */; };
+		EB58890D2B6C162A00F679C5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58890C2B6C162A00F679C5 /* Endpoint.swift */; };
+		EB5889102B6C1D7700F679C5 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58890F2B6C1D7700F679C5 /* TaskModel.swift */; };
+		EB5889132B6C237D00F679C5 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889122B6C237D00F679C5 /* UIColor+Extension.swift */; };
+		EB5889162B6C274B00F679C5 /* TaskItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889152B6C274B00F679C5 /* TaskItemView.swift */; };
+		EB5889192B6C280600F679C5 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889182B6C280600F679C5 /* HomeScreenViewModel.swift */; };
+		EB58891D2B6C462C00F679C5 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58891C2B6C462C00F679C5 /* NetworkConstants.swift */; };
+		EB58891F2B6C470C00F679C5 /* LoginConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58891E2B6C470C00F679C5 /* LoginConstants.swift */; };
+		EB5889222B6C4B2100F679C5 /* CellIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889212B6C4B2100F679C5 /* CellIdentifiers.swift */; };
+		EB5889242B6C4C3200F679C5 /* SpaceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889232B6C4C3200F679C5 /* SpaceSize.swift */; };
+		EB5889282B6C4E1600F679C5 /* ThemeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889272B6C4E1600F679C5 /* ThemeFont.swift */; };
+		EB58892A2B6C4E3500F679C5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889292B6C4E3500F679C5 /* Theme.swift */; };
+		EB58892C2B6C4ED100F679C5 /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58892B2B6C4ED100F679C5 /* FontSize.swift */; };
+		EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +40,20 @@
 		EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEnums.swift; sourceTree = "<group>"; };
 		EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSize.swift; sourceTree = "<group>"; };
 		EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		EB5889062B6C0FC800F679C5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EB58890C2B6C162A00F679C5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		EB58890F2B6C1D7700F679C5 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		EB5889122B6C237D00F679C5 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		EB5889152B6C274B00F679C5 /* TaskItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemView.swift; sourceTree = "<group>"; };
+		EB5889182B6C280600F679C5 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		EB58891C2B6C462C00F679C5 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		EB58891E2B6C470C00F679C5 /* LoginConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConstants.swift; sourceTree = "<group>"; };
+		EB5889212B6C4B2100F679C5 /* CellIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiers.swift; sourceTree = "<group>"; };
+		EB5889232B6C4C3200F679C5 /* SpaceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceSize.swift; sourceTree = "<group>"; };
+		EB5889272B6C4E1600F679C5 /* ThemeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFont.swift; sourceTree = "<group>"; };
+		EB5889292B6C4E3500F679C5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EB58892B2B6C4ED100F679C5 /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
+		EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +96,10 @@
 		EB3679BB2B6AA47D0015E5BD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EB5889252B6C4DF300F679C5 /* Init */,
+				EB58891B2B6C461900F679C5 /* Constants */,
+				EB5889112B6C236D00F679C5 /* Extensions */,
+				EB5889052B6C0FB800F679C5 /* Service */,
 				EB3679BE2B6AA49B0015E5BD /* Supported */,
 			);
 			path = Core;
@@ -112,6 +144,7 @@
 		EB5888F92B6BBB7000F679C5 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				EB5889202B6C4B0600F679C5 /* CellIdentifiers */,
 				EB5888FD2B6BBB9800F679C5 /* Path */,
 				EB5888FE2B6BBB9E00F679C5 /* Size */,
 			);
@@ -130,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */,
+				EB5889232B6C4C3200F679C5 /* SpaceSize.swift */,
+				EB58892B2B6C4ED100F679C5 /* FontSize.swift */,
 			);
 			path = Size;
 			sourceTree = "<group>";
@@ -137,9 +172,88 @@
 		EB5889012B6C086000F679C5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */,
+				EB5889172B6C27F600F679C5 /* ViewModel */,
+				EB5889142B6C272700F679C5 /* View */,
+				EB58890E2B6C1D6600F679C5 /* Model */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		EB5889052B6C0FB800F679C5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889062B6C0FC800F679C5 /* NetworkManager.swift */,
+				EB58890C2B6C162A00F679C5 /* Endpoint.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		EB58890E2B6C1D6600F679C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB58890F2B6C1D7700F679C5 /* TaskModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EB5889112B6C236D00F679C5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889122B6C237D00F679C5 /* UIColor+Extension.swift */,
+				EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EB5889142B6C272700F679C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */,
+				EB5889152B6C274B00F679C5 /* TaskItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EB5889172B6C27F600F679C5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889182B6C280600F679C5 /* HomeScreenViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EB58891B2B6C461900F679C5 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				EB58891C2B6C462C00F679C5 /* NetworkConstants.swift */,
+				EB58891E2B6C470C00F679C5 /* LoginConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		EB5889202B6C4B0600F679C5 /* CellIdentifiers */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889212B6C4B2100F679C5 /* CellIdentifiers.swift */,
+			);
+			path = CellIdentifiers;
+			sourceTree = "<group>";
+		};
+		EB5889252B6C4DF300F679C5 /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889262B6C4DFA00F679C5 /* Theme */,
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		EB5889262B6C4DFA00F679C5 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889272B6C4E1600F679C5 /* ThemeFont.swift */,
+				EB5889292B6C4E3500F679C5 /* Theme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,11 +326,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */,
+				EB5889242B6C4C3200F679C5 /* SpaceSize.swift in Sources */,
+				EB58892C2B6C4ED100F679C5 /* FontSize.swift in Sources */,
+				EB5889192B6C280600F679C5 /* HomeScreenViewModel.swift in Sources */,
 				EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */,
+				EB58890D2B6C162A00F679C5 /* Endpoint.swift in Sources */,
+				EB5889102B6C1D7700F679C5 /* TaskModel.swift in Sources */,
+				EB5889162B6C274B00F679C5 /* TaskItemView.swift in Sources */,
 				EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */,
+				EB5889072B6C0FC800F679C5 /* NetworkManager.swift in Sources */,
+				EB58892A2B6C4E3500F679C5 /* Theme.swift in Sources */,
 				EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */,
+				EB5889222B6C4B2100F679C5 /* CellIdentifiers.swift in Sources */,
 				EB3679C32B6AA5D20015E5BD /* SplashScreenViewController.swift in Sources */,
+				EB5889282B6C4E1600F679C5 /* ThemeFont.swift in Sources */,
+				EB58891D2B6C462C00F679C5 /* NetworkConstants.swift in Sources */,
 				EB5889032B6C087A00F679C5 /* HomeScreenViewController.swift in Sources */,
+				EB5889132B6C237D00F679C5 /* UIColor+Extension.swift in Sources */,
+				EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */,
+				EB58891F2B6C470C00F679C5 /* LoginConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
