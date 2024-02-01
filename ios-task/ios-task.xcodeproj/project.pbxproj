@@ -12,6 +12,8 @@
 		EB3679B12B6AA4730015E5BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB3679B02B6AA4730015E5BD /* Assets.xcassets */; };
 		EB3679C32B6AA5D20015E5BD /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679C22B6AA5D20015E5BD /* SplashScreenViewController.swift */; };
 		EB3679C52B6AA6120015E5BD /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679C42B6AA6120015E5BD /* LoginScreenViewController.swift */; };
+		EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */; };
+		EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		EB3679B52B6AA4730015E5BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB3679C22B6AA5D20015E5BD /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		EB3679C42B6AA6120015E5BD /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
+		EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEnums.swift; sourceTree = "<group>"; };
+		EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +76,7 @@
 		EB3679BC2B6AA4870015E5BD /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				EB5888F82B6BBA2B00F679C5 /* New Group */,
+				EB5888F92B6BBB7000F679C5 /* Enums */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -121,11 +125,29 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		EB5888F82B6BBA2B00F679C5 /* New Group */ = {
+		EB5888F92B6BBB7000F679C5 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				EB5888FD2B6BBB9800F679C5 /* Path */,
+				EB5888FE2B6BBB9E00F679C5 /* Size */,
 			);
-			path = "New Group";
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		EB5888FD2B6BBB9800F679C5 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */,
+			);
+			path = Path;
+			sourceTree = "<group>";
+		};
+		EB5888FE2B6BBB9E00F679C5 /* Size */ = {
+			isa = PBXGroup;
+			children = (
+				EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */,
+			);
+			path = Size;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,9 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */,
 				EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */,
 				EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */,
 				EB3679C52B6AA6120015E5BD /* LoginScreenViewController.swift in Sources */,
+				EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */,
 				EB3679C32B6AA5D20015E5BD /* SplashScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
