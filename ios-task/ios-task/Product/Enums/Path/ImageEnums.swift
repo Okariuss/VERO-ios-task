@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum ImageEnums {
+enum ImagePath {
     case appImage
     
 

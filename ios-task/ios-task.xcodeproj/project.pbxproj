@@ -11,9 +11,9 @@
 		EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679A92B6AA4720015E5BD /* SceneDelegate.swift */; };
 		EB3679B12B6AA4730015E5BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB3679B02B6AA4730015E5BD /* Assets.xcassets */; };
 		EB3679C32B6AA5D20015E5BD /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679C22B6AA5D20015E5BD /* SplashScreenViewController.swift */; };
-		EB3679C52B6AA6120015E5BD /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679C42B6AA6120015E5BD /* LoginScreenViewController.swift */; };
 		EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */; };
 		EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */; };
+		EB5889032B6C087A00F679C5 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,9 +23,9 @@
 		EB3679B02B6AA4730015E5BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB3679B52B6AA4730015E5BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB3679C22B6AA5D20015E5BD /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
-		EB3679C42B6AA6120015E5BD /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		EB5888FA2B6BBB7E00F679C5 /* ImageEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEnums.swift; sourceTree = "<group>"; };
 		EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSize.swift; sourceTree = "<group>"; };
+		EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +84,7 @@
 		EB3679BD2B6AA48F0015E5BD /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				EB3679C02B6AA5BB0015E5BD /* Auth */,
+				EB5889012B6C086000F679C5 /* Home */,
 				EB3679BF2B6AA5B40015E5BD /* Splash */,
 			);
 			path = Feature;
@@ -107,22 +107,6 @@
 				EB3679C22B6AA5D20015E5BD /* SplashScreenViewController.swift */,
 			);
 			path = Splash;
-			sourceTree = "<group>";
-		};
-		EB3679C02B6AA5BB0015E5BD /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				EB3679C12B6AA5C10015E5BD /* Login */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		EB3679C12B6AA5C10015E5BD /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				EB3679C42B6AA6120015E5BD /* LoginScreenViewController.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		EB5888F92B6BBB7000F679C5 /* Enums */ = {
@@ -148,6 +132,14 @@
 				EB5888FF2B6BBBE500F679C5 /* ImageSize.swift */,
 			);
 			path = Size;
+			sourceTree = "<group>";
+		};
+		EB5889012B6C086000F679C5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,9 +214,9 @@
 				EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */,
 				EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */,
 				EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */,
-				EB3679C52B6AA6120015E5BD /* LoginScreenViewController.swift in Sources */,
 				EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */,
 				EB3679C32B6AA5D20015E5BD /* SplashScreenViewController.swift in Sources */,
+				EB5889032B6C087A00F679C5 /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
