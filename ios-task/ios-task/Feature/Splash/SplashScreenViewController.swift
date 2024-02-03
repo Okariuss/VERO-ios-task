@@ -39,7 +39,7 @@ class SplashScreenViewController: UIViewController {
     
     private func skipSplash() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            let vc = HomeScreenViewController()
+            let vc = UINavigationController(rootViewController: HomeScreenViewController())
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)

@@ -28,6 +28,8 @@
 		EB58892A2B6C4E3500F679C5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5889292B6C4E3500F679C5 /* Theme.swift */; };
 		EB58892C2B6C4ED100F679C5 /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58892B2B6C4ED100F679C5 /* FontSize.swift */; };
 		EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */; };
+		EB75FCA72B6ECEE400299C13 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */; };
+		EB75FCAA2B6ECF6200299C13 /* SearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		EB5889292B6C4E3500F679C5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EB58892B2B6C4ED100F679C5 /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
 		EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
+		EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchBar+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 		EB3679BC2B6AA4870015E5BD /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				EB75FCAB2B6EF80F00299C13 /* Extensions */,
 				EB5888F92B6BBB7000F679C5 /* Enums */,
 			);
 			path = Product;
@@ -256,6 +261,23 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		EB75FCA82B6ECF2900299C13 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */,
+				EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EB75FCAB2B6EF80F00299C13 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EB75FCA82B6ECF2900299C13 /* Home */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,6 +350,7 @@
 				EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */,
 				EB5889242B6C4C3200F679C5 /* SpaceSize.swift in Sources */,
 				EB58892C2B6C4ED100F679C5 /* FontSize.swift in Sources */,
+				EB75FCA72B6ECEE400299C13 /* TableView+Extension.swift in Sources */,
 				EB5889192B6C280600F679C5 /* HomeScreenViewModel.swift in Sources */,
 				EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */,
 				EB58890D2B6C162A00F679C5 /* Endpoint.swift in Sources */,
@@ -337,6 +360,7 @@
 				EB5889072B6C0FC800F679C5 /* NetworkManager.swift in Sources */,
 				EB58892A2B6C4E3500F679C5 /* Theme.swift in Sources */,
 				EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */,
+				EB75FCAA2B6ECF6200299C13 /* SearchBar+Extension.swift in Sources */,
 				EB5889222B6C4B2100F679C5 /* CellIdentifiers.swift in Sources */,
 				EB3679C32B6AA5D20015E5BD /* SplashScreenViewController.swift in Sources */,
 				EB5889282B6C4E1600F679C5 /* ThemeFont.swift in Sources */,

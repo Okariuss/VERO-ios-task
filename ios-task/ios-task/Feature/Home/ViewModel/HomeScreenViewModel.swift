@@ -16,8 +16,13 @@ class HomeScreenViewModel {
     weak var delegate: HomeScreenViewModelDelegate?
 
     private var tasks: [TaskModel] = []
+    private var searchText: String = ""
     
     private var networkManager = NetworkManager.shared
+    
+    func getTasks() -> [TaskModel] {
+        return tasks
+    }
 
     func loginAndFetchData() {
         let loginEndpoint = Endpoint.login
@@ -85,10 +90,22 @@ class HomeScreenViewModel {
     }
 
     var numberOfTasks: Int {
-        return tasks.count
+        return filteredTasks().count
     }
 
     func task(at index: Int) -> TaskModel {
-        return tasks[index]
+        return filteredTasks()[index]
+    }
+
+    func updateSearchText(_ newText: String) {
+        searchText = newText
+        delegate?.didUpdateTasks()
+    }
+
+    private func filteredTasks() -> [TaskModel] {
+        return searchText.isEmpty ? tasks : tasks.filter { task in
+            return task.title.lowercased().contains(searchText.lowercased()) ||
+                    task.description.lowercased().contains(searchText.lowercased())
+        }
     }
 }

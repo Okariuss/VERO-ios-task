@@ -11,11 +11,36 @@ class HomeScreenViewController: UIViewController {
 
     var viewModel: HomeScreenViewModel!
     
-    let tableView: UITableView = {
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "VERO iOS Task"
+        label.font = Theme.defaultTheme.themeFont.headlineFont
+        label.textColor = .label
+        return label
+    }()
+    
+    private let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        return searchController
+    }()
+    
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    var accessibleTableView: UITableView {
+        return tableView
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +50,8 @@ class HomeScreenViewController: UIViewController {
     }
     
     private func setDesign() {
+        
+        configureNavigationBar()
         
         tableViewDesign()
         
@@ -58,29 +85,4 @@ class HomeScreenViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(tableViewConstraints)
     }
-}
-
-extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, HomeScreenViewModelDelegate {
-    
-    func didUpdateTasks() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfTasks
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.taskItemView.rawValue, for: indexPath) as? TaskItemView else {
-            fatalError("Failed to dequeue TaskItemViewCell.")
-        }
-
-        let task = viewModel.task(at: indexPath.row)
-        cell.configure(with: task)
-
-        return cell
-    }
-
 }
