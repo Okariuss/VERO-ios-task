@@ -11,16 +11,22 @@ import UIKit
 extension HomeScreenViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text {
-            viewModel.updateSearchText(searchText)
-            accessibleTableView.reloadData()
-        } else {
-            viewModel.loginAndFetchData()
-        }
+        handleSearch(with: searchBar.text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.updateSearchText("")
-        accessibleTableView.reloadData()
+        handleSearch(with: "")
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        search(shouldShow: false)
+    }
+    
+    private func handleSearch(with searchText: String?) {
+        viewModel.updateSearchText(searchText ?? "")
+        tableView.reloadData()
+        
+        if searchText?.isEmpty == true {
+            viewModel.loginAndFetchData()
+        }
     }
 }

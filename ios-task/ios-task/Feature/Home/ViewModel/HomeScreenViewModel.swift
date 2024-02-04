@@ -19,10 +19,6 @@ class HomeScreenViewModel {
     private var searchText: String = ""
     
     private var networkManager = NetworkManager.shared
-    
-    func getTasks() -> [TaskModel] {
-        return tasks
-    }
 
     func loginAndFetchData() {
         let loginEndpoint = Endpoint.login
@@ -105,7 +101,7 @@ class HomeScreenViewModel {
     private func filteredTasks() -> [TaskModel] {
         return searchText.isEmpty ? tasks : tasks.filter { task in
             return task.title.lowercased().contains(searchText.lowercased()) ||
-                    task.description.lowercased().contains(searchText.lowercased())
+            task.description.lowercased().contains(searchText.lowercased()) || task.colorCode.lowercased().contains(searchText.lowercased())
         }
     }
 }

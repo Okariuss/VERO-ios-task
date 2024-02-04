@@ -19,27 +19,42 @@ class HomeScreenViewController: UIViewController {
         return label
     }()
     
-    private let searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.obscuresBackgroundDuringPresentation = false
-        return searchController
-    }()
+    private let searchBar = UISearchBar()
     
-    private let tableView: UITableView = {
+    private(set) lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    var accessibleTableView: UITableView {
-        return tableView
+    private func configureNavigationBar() {
+        showSearchBarButton(shouldShow: true)
+        
+        searchBar.sizeToFit()
+        searchBar.delegate = self
     }
     
-    private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-        searchController.searchBar.delegate = self
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
+    func showSearchBarButton(shouldShow: Bool) {
+        if shouldShow {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search,
+                                                                target: self,
+                                                                action: #selector(searchButtonTapped))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+        } else {
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.leftBarButtonItem = nil
+        }
+    }
+    
+    @objc private func searchButtonTapped() {
+        searchBar.becomeFirstResponder()
+        search(shouldShow: true)
+    }
+    
+    func search(shouldShow: Bool) {
+        showSearchBarButton(shouldShow: !shouldShow)
+        searchBar.showsCancelButton = shouldShow
+        navigationItem.titleView = shouldShow ? searchBar : nil
     }
 
     override func viewDidLoad() {

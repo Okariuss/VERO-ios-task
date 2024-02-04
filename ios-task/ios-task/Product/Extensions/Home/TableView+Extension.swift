@@ -12,7 +12,7 @@ extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, 
     
     func didUpdateTasks() {
         DispatchQueue.main.async {
-            self.accessibleTableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
