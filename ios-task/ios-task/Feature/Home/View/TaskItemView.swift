@@ -8,8 +8,8 @@
 import UIKit
 
 class TaskItemView: UITableViewCell {
-
-    private let titleLabel: UILabel = {
+    
+    private let taskLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Theme.defaultTheme.themeFont.headlineFont
@@ -17,10 +17,18 @@ class TaskItemView: UITableViewCell {
         return label
     }()
 
-    private let descriptionLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Theme.defaultTheme.themeFont.bodyFont
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Theme.defaultTheme.themeFont.subtitleFont
         label.numberOfLines = 0
         return label
     }()
@@ -36,15 +44,26 @@ class TaskItemView: UITableViewCell {
     }
 
     private func setupUI() {
+        addSubview(taskLabel)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
         
         configureConstraints()
     }
     
+    private func taskConstraints() {
+        let taskLabelConstraints = [
+            taskLabel.topAnchor.constraint(equalTo: topAnchor, constant: SpaceSize.normal.rawValue),
+            taskLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: SpaceSize.normal.rawValue),
+            taskLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: SpaceSize.normal.rawValue),
+        ]
+        
+        NSLayoutConstraint.activate(taskLabelConstraints)
+    }
+    
     private func titleConstraints() {
         let titleLabelConstraints = [
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: SpaceSize.normal.rawValue),
+            titleLabel.topAnchor.constraint(equalTo: taskLabel.bottomAnchor, constant: SpaceSize.normal.rawValue),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: SpaceSize.normal.rawValue),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -SpaceSize.normal.rawValue)
         ]
@@ -64,13 +83,16 @@ class TaskItemView: UITableViewCell {
     }
     
     private func configureConstraints() {
+        taskConstraints()
+        
         titleConstraints()
         
         descriptionConstraints()
     }
 
     func configure(with task: TaskModel) {
-        titleLabel.text = task.title
+        taskLabel.text = "TASK: \(task.task)"
+        titleLabel.text = "TITLE: \(task.title)"
         descriptionLabel.text = task.description
         backgroundColor = task.backgroundColor
     }

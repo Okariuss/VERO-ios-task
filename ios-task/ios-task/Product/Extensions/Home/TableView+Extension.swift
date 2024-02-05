@@ -16,8 +16,13 @@ extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.sortedAndGroupedTasks.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfTasks
+        let taskKey = Array(viewModel.sortedAndGroupedTasks.keys.sorted())[section]
+        return viewModel.sortedAndGroupedTasks[taskKey]?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -25,10 +30,48 @@ extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, 
             fatalError("Failed to dequeue TaskItemViewCell.")
         }
 
-        let task = viewModel.task(at: indexPath.row)
-        cell.configure(with: task)
+        let taskName = viewModel.sortedAndGroupedTasks.keys.sorted()[indexPath.section]
+        if let tasksForName = viewModel.sortedAndGroupedTasks[taskName] {
+            let task = tasksForName[indexPath.row]
+            cell.configure(with: task)
+        }
 
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .lightGray
+        
+        let label = UILabel()
+        label.text = "TASK: \(viewModel.sortedAndGroupedTasks.keys.sorted()[section])"
+        label.font = Theme.defaultTheme.themeFont.headlineFont.boldVersion
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        headerView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+        ])
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
+        let taskName = viewModel.sortedAndGroupedTasks.keys.sorted()[indexPath.section]
+        if let tasksForName = viewModel.sortedAndGroupedTasks[taskName] {
+            let selectedTask = tasksForName[indexPath.row]
+
+            // Present TaskDetailsViewController with selectedTask
+            let taskDetailsVC = TaskDetailsViewController()
+            taskDetailsVC.selectedTask = selectedTask
+
+            // Push or present the TaskDetailsViewController as needed
+            // For example, if using a UINavigationController, you can push the new view controller
+            navigationController?.pushViewController(taskDetailsVC, animated: true)
+        }
+    }
 }

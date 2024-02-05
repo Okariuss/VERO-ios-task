@@ -16,7 +16,8 @@ extension Theme {
         return Theme(
             themeFont: ThemeFont(
                 headlineFont: FontSize.headline.toFont.boldVersion,
-                bodyFont: FontSize.body.toFont
+                bodyFont: FontSize.body.toFont.boldVersion,
+                subtitleFont: FontSize.subtitle.toFont
             )
         )
     }

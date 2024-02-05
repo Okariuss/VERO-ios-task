@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB16F3E52B70DCB400BB1E18 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB16F3E42B70DCB400BB1E18 /* TaskDetailsViewController.swift */; };
 		EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679A72B6AA4720015E5BD /* AppDelegate.swift */; };
 		EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679A92B6AA4720015E5BD /* SceneDelegate.swift */; };
 		EB3679B12B6AA4730015E5BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB3679B02B6AA4730015E5BD /* Assets.xcassets */; };
@@ -30,9 +31,11 @@
 		EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */; };
 		EB75FCA72B6ECEE400299C13 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */; };
 		EB75FCAA2B6ECF6200299C13 /* SearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */; };
+		EB8E02DD2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E02DC2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB16F3E42B70DCB400BB1E18 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		EB3679A42B6AA4720015E5BD /* ios-task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB3679A72B6AA4720015E5BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB3679A92B6AA4720015E5BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 		EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchBar+Extension.swift"; sourceTree = "<group>"; };
+		EB8E02DC2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemDetailViewComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 		EB3679BC2B6AA4870015E5BD /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				EB8E02DB2B6FDBDB0056182B /* Components */,
 				EB75FCAB2B6EF80F00299C13 /* Extensions */,
 				EB5888F92B6BBB7000F679C5 /* Enums */,
 			);
@@ -215,6 +220,7 @@
 			children = (
 				EB5889022B6C087A00F679C5 /* HomeScreenViewController.swift */,
 				EB5889152B6C274B00F679C5 /* TaskItemView.swift */,
+				EB16F3E42B70DCB400BB1E18 /* TaskDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,6 +282,14 @@
 				EB75FCA82B6ECF2900299C13 /* Home */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EB8E02DB2B6FDBDB0056182B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EB8E02DC2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +371,7 @@
 				EB5889102B6C1D7700F679C5 /* TaskModel.swift in Sources */,
 				EB5889162B6C274B00F679C5 /* TaskItemView.swift in Sources */,
 				EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */,
+				EB16F3E52B70DCB400BB1E18 /* TaskDetailsViewController.swift in Sources */,
 				EB5889072B6C0FC800F679C5 /* NetworkManager.swift in Sources */,
 				EB58892A2B6C4E3500F679C5 /* Theme.swift in Sources */,
 				EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */,
@@ -369,6 +384,7 @@
 				EB5889132B6C237D00F679C5 /* UIColor+Extension.swift in Sources */,
 				EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */,
 				EB58891F2B6C470C00F679C5 /* LoginConstants.swift in Sources */,
+				EB8E02DD2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

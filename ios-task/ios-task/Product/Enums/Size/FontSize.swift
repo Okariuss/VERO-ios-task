@@ -11,13 +11,16 @@ import UIKit
 enum FontSize {
     case body
     case headline
+    case subtitle
     
     var rawValue: CGFloat {
         switch self {
-        case .body:
+        case .subtitle:
             return 12
+        case .body:
+            return 16
         case .headline:
-            return 18
+            return 20
         }
     }
     

@@ -15,7 +15,7 @@ class HomeScreenViewModel {
 
     weak var delegate: HomeScreenViewModelDelegate?
 
-    private var tasks: [TaskModel] = []
+    private var tasks: Task = []
     private var searchText: String = ""
     
     private var networkManager = NetworkManager.shared
@@ -74,10 +74,10 @@ class HomeScreenViewModel {
     }
 
 
-    private func parseTasks(from data: Data) -> [TaskModel] {
+    private func parseTasks(from data: Data) -> Task {
         do {
             let decoder = JSONDecoder()
-            let decodedTasks = try decoder.decode([TaskModel].self, from: data)
+            let decodedTasks = try decoder.decode(Task.self, from: data)
             return decodedTasks
         } catch {
             print("Error parsing tasks response: \(error)")
@@ -97,11 +97,59 @@ class HomeScreenViewModel {
         searchText = newText
         delegate?.didUpdateTasks()
     }
+    
+    var sortedAndGroupedTasks: [String: Task] {
+        let sortedTasks = filteredTasks().sorted { $0.task < $1.task }
+        var groupedTasks = [String: Task]()
 
-    private func filteredTasks() -> [TaskModel] {
+        for task in sortedTasks {
+            let key: String
+
+            if !task.parentTaskID.rawValue.isEmpty {
+                key = task.parentTaskID.rawValue
+            } else {
+                key = task.task
+            }
+
+            if var existingTasks = groupedTasks[key] {
+                existingTasks.append(task)
+                groupedTasks[key] = existingTasks
+            } else {
+                groupedTasks[key] = [task]
+            }
+        }
+
+        return groupedTasks
+    }
+
+    private func filteredTasks() -> Task {
         return searchText.isEmpty ? tasks : tasks.filter { task in
-            return task.title.lowercased().contains(searchText.lowercased()) ||
-            task.description.lowercased().contains(searchText.lowercased()) || task.colorCode.lowercased().contains(searchText.lowercased())
+            let search = searchText.lowercased()
+
+            let hasMatchingDescription = task.description.lowercased().contains(search)
+            let hasMatchingColorCode = task.colorCode.lowercased().contains(search)
+            let hasMatchingParentTaskID = task.parentTaskID.rawValue.lowercased().contains(search)
+            let hasMatchingWageType = task.wageType.lowercased().contains(search)
+            let hasMatchingTitle = task.title.lowercased().contains(search)
+            let hasMatchingBusinessUnit = task.businessUnit.rawValue.lowercased().contains(search)
+            let hasMatchingBusinessUnitKey = task.businessUnitKey?.rawValue.lowercased().contains(search) ?? false
+            let hasMatchingSort = task.sort.lowercased().contains(search)
+            let hasMatchingTask = task.task.lowercased().contains(search)
+            let hasMatchingWorkingTime = task.workingTime.debugDescription.lowercased().contains(search)
+            let hasMatchingPreplanningBoardQuickSelect = task.preplanningBoardQuickSelect.debugDescription.lowercased().contains(search)
+            let hasMatchingIsAvailable = task.isAvailableInTimeTrackingKioskMode.description.lowercased().contains(search)
+            return hasMatchingDescription ||
+                   hasMatchingColorCode ||
+                   hasMatchingParentTaskID ||
+                   hasMatchingWageType ||
+                   hasMatchingTitle ||
+                   hasMatchingBusinessUnit ||
+                   hasMatchingBusinessUnitKey ||
+                   hasMatchingSort ||
+                   hasMatchingTask ||
+                   hasMatchingWorkingTime ||
+                   hasMatchingPreplanningBoardQuickSelect ||
+                   hasMatchingIsAvailable
         }
     }
 }
