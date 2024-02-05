@@ -15,18 +15,18 @@ extension HomeScreenViewController: UISearchBarDelegate{
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        handleSearch(with: "")
-        searchBar.text = ""
+        handleSearch(with: AppConstants.emptytext)
+        searchBar.text = AppConstants.emptytext
         searchBar.resignFirstResponder()
         search(shouldShow: false)
     }
     
     private func handleSearch(with searchText: String?) {
-        viewModel.updateSearchText(searchText ?? "")
+        viewModel.updateSearchText(searchText ?? AppConstants.emptytext)
         tableView.reloadData()
         
         if searchText?.isEmpty == true {
-            viewModel.loginAndFetchData()
+            viewModel.authenticateAndFetchData()
         }
     }
 }

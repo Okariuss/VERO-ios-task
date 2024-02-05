@@ -13,7 +13,7 @@ class HomeScreenViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "VERO iOS Task"
+        label.text = AppConstants.appName
         label.font = Theme.defaultTheme.themeFont.headlineFont
         label.textColor = .label
         return label
@@ -52,7 +52,7 @@ class HomeScreenViewController: UIViewController {
     }
     
     @objc private func refreshData() {
-        viewModel.loginAndFetchData()
+        viewModel.authenticateAndFetchData()
     }
     
     func search(shouldShow: Bool) {
@@ -98,7 +98,7 @@ class HomeScreenViewController: UIViewController {
     private func viewModelOperation() {
         viewModel = HomeScreenViewModel()
         viewModel.delegate = self
-        viewModel.loginAndFetchData()
+        viewModel.authenticateAndFetchData()
     }
     
     private func configureConstraints() {

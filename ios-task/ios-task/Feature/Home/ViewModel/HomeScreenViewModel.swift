@@ -18,9 +18,21 @@ class HomeScreenViewModel {
     weak var delegate: HomeScreenViewModelDelegate?
 
     private var tasks: Task = []
-    private var searchText: String = ""
+    private var searchText: String = AppConstants.emptytext
     
     private var networkManager = NetworkManager.shared
+    
+    init() {
+        loadTaskFromUserDefaults()
+    }
+    
+    func authenticateAndFetchData() {
+        if let authToken = CacheItems.token.readString {
+            fetchData(authToken: authToken)
+        } else {
+            loginAndFetchData()
+        }
+    }
 
     func loginAndFetchData() {
         let loginEndpoint = Endpoint.login
@@ -34,6 +46,7 @@ class HomeScreenViewModel {
             } else if let data = data {
                     
                 if let authToken = parseAuthToken(from: data) {
+                    CacheItems.token.writeString(authToken)
                     self.fetchData(authToken: authToken)
                 }
             }
@@ -48,7 +61,7 @@ class HomeScreenViewModel {
 
             if let error = error {
                 print("Fetch Data Error: \(error)")
-                self.delegate?.showError(message: "Failed to fetch data. Please check your internet connection.")
+                self.delegate?.showError(message: NetworkConstants.failFetchData)
             } else if let data = data {
                 let decodedTasks = parseTasks(from: data)
 
@@ -57,6 +70,7 @@ class HomeScreenViewModel {
                 DispatchQueue.main.async {
                     self.delegate?.didUpdateTasks()
                     self.delegate?.endRefreshing()
+                    self.saveTasksToUserDefaults()
                 }
             }
         }
@@ -87,6 +101,19 @@ class HomeScreenViewModel {
         } catch {
             print("Error parsing tasks response: \(error)")
             return []
+        }
+    }
+    
+    private func saveTasksToUserDefaults() {
+        let encoder = JSONEncoder()
+        if let encodedData = try? encoder.encode(tasks) {
+            CacheItems.savedTasks.writeData(encodedData)
+        }
+    }
+    
+    private func loadTaskFromUserDefaults() {
+        if let savedData = CacheItems.savedTasks.readData {
+            tasks = parseTasks(from: savedData)
         }
     }
 

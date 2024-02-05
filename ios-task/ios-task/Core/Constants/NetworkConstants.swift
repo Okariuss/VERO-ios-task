@@ -19,4 +19,7 @@ final class NetworkConstants {
     static let loginAuthorizationValue = "Basic QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz"
     static let contentTypeKey = "Content-Type"
     static let loginContentTypeValue = "application/json"
+    
+    static let noInternet = "No Internet Connection"
+    static let failFetchData = "Failed to fetch data. Please check your internet connection."
 }

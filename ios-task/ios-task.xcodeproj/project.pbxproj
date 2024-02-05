@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EB16F3E52B70DCB400BB1E18 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB16F3E42B70DCB400BB1E18 /* TaskDetailsViewController.swift */; };
+		EB16F3E82B70ECF900BB1E18 /* CacheItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB16F3E72B70ECF900BB1E18 /* CacheItems.swift */; };
+		EB16F3EA2B71068C00BB1E18 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB16F3E92B71068C00BB1E18 /* AppConstants.swift */; };
 		EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679A72B6AA4720015E5BD /* AppDelegate.swift */; };
 		EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3679A92B6AA4720015E5BD /* SceneDelegate.swift */; };
 		EB3679B12B6AA4730015E5BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB3679B02B6AA4730015E5BD /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		EB16F3E42B70DCB400BB1E18 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
+		EB16F3E72B70ECF900BB1E18 /* CacheItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheItems.swift; sourceTree = "<group>"; };
+		EB16F3E92B71068C00BB1E18 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		EB3679A42B6AA4720015E5BD /* ios-task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB3679A72B6AA4720015E5BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB3679A92B6AA4720015E5BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB16F3E62B70ECEC00BB1E18 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				EB16F3E72B70ECF900BB1E18 /* CacheItems.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		EB36799B2B6AA4720015E5BD = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +116,7 @@
 		EB3679BB2B6AA47D0015E5BD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EB16F3E62B70ECEC00BB1E18 /* Enum */,
 				EB5889252B6C4DF300F679C5 /* Init */,
 				EB58891B2B6C461900F679C5 /* Constants */,
 				EB5889112B6C236D00F679C5 /* Extensions */,
@@ -238,6 +251,7 @@
 			children = (
 				EB58891C2B6C462C00F679C5 /* NetworkConstants.swift */,
 				EB58891E2B6C470C00F679C5 /* LoginConstants.swift */,
+				EB16F3E92B71068C00BB1E18 /* AppConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -373,6 +387,7 @@
 				EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */,
 				EB16F3E52B70DCB400BB1E18 /* TaskDetailsViewController.swift in Sources */,
 				EB5889072B6C0FC800F679C5 /* NetworkManager.swift in Sources */,
+				EB16F3E82B70ECF900BB1E18 /* CacheItems.swift in Sources */,
 				EB58892A2B6C4E3500F679C5 /* Theme.swift in Sources */,
 				EB5889002B6BBBE500F679C5 /* ImageSize.swift in Sources */,
 				EB75FCAA2B6ECF6200299C13 /* SearchBar+Extension.swift in Sources */,
@@ -383,6 +398,7 @@
 				EB5889032B6C087A00F679C5 /* HomeScreenViewController.swift in Sources */,
 				EB5889132B6C237D00F679C5 /* UIColor+Extension.swift in Sources */,
 				EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */,
+				EB16F3EA2B71068C00BB1E18 /* AppConstants.swift in Sources */,
 				EB58891F2B6C470C00F679C5 /* LoginConstants.swift in Sources */,
 				EB8E02DD2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift in Sources */,
 			);
