@@ -51,6 +51,10 @@ class HomeScreenViewController: UIViewController {
         search(shouldShow: true)
     }
     
+    @objc private func refreshData() {
+        viewModel.loginAndFetchData()
+    }
+    
     func search(shouldShow: Bool) {
         showSearchBarButton(shouldShow: !shouldShow)
         searchBar.showsCancelButton = shouldShow
@@ -75,6 +79,12 @@ class HomeScreenViewController: UIViewController {
         viewModelOperation()
     }
     
+    private func refreshControl() -> UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        return refreshControl
+    }
+    
     private func tableViewDesign() {
 
         view.addSubview(tableView)
@@ -82,6 +92,7 @@ class HomeScreenViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TaskItemView.self, forCellReuseIdentifier: CellIdentifiers.taskItemView.rawValue)
+        tableView.refreshControl = refreshControl()
     }
     
     private func viewModelOperation() {

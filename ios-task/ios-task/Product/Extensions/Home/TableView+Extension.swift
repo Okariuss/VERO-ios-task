@@ -16,6 +16,21 @@ extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
+    func endRefreshing() {
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func showError(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.sortedAndGroupedTasks.count
     }
@@ -65,12 +80,9 @@ extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, 
         if let tasksForName = viewModel.sortedAndGroupedTasks[taskName] {
             let selectedTask = tasksForName[indexPath.row]
 
-            // Present TaskDetailsViewController with selectedTask
             let taskDetailsVC = TaskDetailsViewController()
             taskDetailsVC.selectedTask = selectedTask
 
-            // Push or present the TaskDetailsViewController as needed
-            // For example, if using a UINavigationController, you can push the new view controller
             navigationController?.pushViewController(taskDetailsVC, animated: true)
         }
     }

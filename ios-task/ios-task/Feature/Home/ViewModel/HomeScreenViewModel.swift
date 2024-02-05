@@ -9,6 +9,8 @@ import Foundation
 
 protocol HomeScreenViewModelDelegate: AnyObject {
     func didUpdateTasks()
+    func endRefreshing()
+    func showError(message: String)
 }
 
 class HomeScreenViewModel {
@@ -28,6 +30,7 @@ class HomeScreenViewModel {
 
             if let error = error {
                 print("Login Error: \(error)")
+                self.delegate?.showError(message: "Failed to login. Please try again")
             } else if let data = data {
                     
                 if let authToken = parseAuthToken(from: data) {
@@ -45,6 +48,7 @@ class HomeScreenViewModel {
 
             if let error = error {
                 print("Fetch Data Error: \(error)")
+                self.delegate?.showError(message: "Failed to fetch data. Please check your internet connection.")
             } else if let data = data {
                 let decodedTasks = parseTasks(from: data)
 
@@ -52,6 +56,7 @@ class HomeScreenViewModel {
 
                 DispatchQueue.main.async {
                     self.delegate?.didUpdateTasks()
+                    self.delegate?.endRefreshing()
                 }
             }
         }
