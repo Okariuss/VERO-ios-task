@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class HomeScreenViewController: UIViewController {
 
@@ -19,7 +21,7 @@ class HomeScreenViewController: UIViewController {
         return label
     }()
     
-    private let searchBar = UISearchBar()
+    private(set) lazy var searchBar = UISearchBar()
     
     private(set) lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -27,7 +29,25 @@ class HomeScreenViewController: UIViewController {
         return tableView
     }()
     
+    private let searchButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(ImagePath.search.toSystemImage, for: .normal)
+        button.tintColor = .label
+        return button
+    }()
+    
+    private let scanButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(ImagePath.qr.toSystemImage, for: .normal)
+        button.tintColor = .label
+        return button
+    }()
+    
     private func configureNavigationBar() {
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        scanButton.addTarget(self, action: #selector(scanButtonTapped), for: .touchUpInside)
         showSearchBarButton(shouldShow: true)
         
         searchBar.sizeToFit()
@@ -35,13 +55,13 @@ class HomeScreenViewController: UIViewController {
     }
     
     func showSearchBarButton(shouldShow: Bool) {
+        let searchBarButtonItem = UIBarButtonItem(customView: searchButton)
+        let scanBarButtonItem = UIBarButtonItem(customView: scanButton)
         if shouldShow {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search,
-                                                                target: self,
-                                                                action: #selector(searchButtonTapped))
+            navigationItem.rightBarButtonItems = [searchBarButtonItem, scanBarButtonItem]
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         } else {
-            navigationItem.rightBarButtonItem = nil
+            navigationItem.rightBarButtonItems = nil
             navigationItem.leftBarButtonItem = nil
         }
     }
@@ -51,8 +71,36 @@ class HomeScreenViewController: UIViewController {
         search(shouldShow: true)
     }
     
+    @objc private func scanButtonTapped() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { _ in
+            self.presentImagePicker(sourceType: .camera)
+        }
+        alertController.addAction(cameraAction)
+        
+        let galleryAction = UIAlertAction(title: "Choose from Gallery", style: .default) { _ in
+            self.presentImagePicker(sourceType: .photoLibrary)
+        }
+        alertController.addAction(galleryAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = sourceType
+        imagePickerController.allowsEditing = false
+        present(imagePickerController, animated: true, completion: nil)
+    }
+
+    
     @objc private func refreshData() {
-        viewModel.authenticateAndFetchData()
+        homeViewModel.authenticateAndFetchData()
     }
     
     func search(shouldShow: Bool) {
@@ -60,6 +108,57 @@ class HomeScreenViewController: UIViewController {
         searchBar.showsCancelButton = shouldShow
         navigationItem.titleView = shouldShow ? searchBar : nil
     }
+    
+    func setupQRScanner() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            print("Camera access authorized")
+            startCaptureSession()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                if granted {
+                    DispatchQueue.main.async {
+                        print("Camera access granted")
+                        self?.startCaptureSession()
+                    }
+                } else {
+                    print("Camera access denied")
+                    // Handle access denied
+                }
+            }
+        default:
+            print("Camera access denied")
+            // Handle access denied
+            break
+        }
+    }
+
+    private func startCaptureSession() {
+        guard let captureDevice = AVCaptureDevice.default(for: .video) else {
+            print("No camera available")
+            // Handle no camera
+            return
+        }
+
+        do {
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            let captureSession = AVCaptureSession()
+            captureSession.addInput(input)
+
+            let metadataOutput = AVCaptureMetadataOutput()
+            captureSession.addOutput(metadataOutput)
+
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr]
+
+            captureSession.startRunning()
+
+        } catch {
+            print("Error starting capture session: \(error)")
+            // Handle error
+        }
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

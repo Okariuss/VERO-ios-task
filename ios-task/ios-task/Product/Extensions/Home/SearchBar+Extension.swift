@@ -21,7 +21,7 @@ extension HomeScreenViewController: UISearchBarDelegate{
         search(shouldShow: false)
     }
     
-    private func handleSearch(with searchText: String?) {
+    func handleSearch(with searchText: String?) {
         viewModel.updateSearchText(searchText ?? AppConstants.emptytext)
         tableView.reloadData()
         
