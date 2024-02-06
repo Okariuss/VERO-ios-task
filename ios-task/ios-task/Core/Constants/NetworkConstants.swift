@@ -22,4 +22,5 @@ final class NetworkConstants {
     
     static let noInternet = "No Internet Connection"
     static let failFetchData = "Failed to fetch data. Please check your internet connection."
+    static let loginError = "Failed to login. Please try again"
 }

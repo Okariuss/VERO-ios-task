@@ -33,6 +33,9 @@
 		EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */; };
 		EB75FCA72B6ECEE400299C13 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */; };
 		EB75FCAA2B6ECF6200299C13 /* SearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */; };
+		EB8D83E32B72BDBF000FB55A /* TaskItemComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D83E22B72BDBF000FB55A /* TaskItemComponents.swift */; };
+		EB8D83E52B72BEC7000FB55A /* HomeScreenComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D83E42B72BEC7000FB55A /* HomeScreenComponents.swift */; };
+		EB8D83E92B72C568000FB55A /* CommonComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D83E82B72C568000FB55A /* CommonComponents.swift */; };
 		EB8E02DD2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E02DC2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift */; };
 		EBA251AD2B7240B40040DD08 /* QRScanner+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA251AC2B7240B40040DD08 /* QRScanner+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +69,9 @@
 		EB58892D2B6C57E600F679C5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		EB75FCA62B6ECEE400299C13 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		EB75FCA92B6ECF6200299C13 /* SearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchBar+Extension.swift"; sourceTree = "<group>"; };
+		EB8D83E22B72BDBF000FB55A /* TaskItemComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemComponents.swift; sourceTree = "<group>"; };
+		EB8D83E42B72BEC7000FB55A /* HomeScreenComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenComponents.swift; sourceTree = "<group>"; };
+		EB8D83E82B72C568000FB55A /* CommonComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonComponents.swift; sourceTree = "<group>"; };
 		EB8E02DC2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemDetailViewComponents.swift; sourceTree = "<group>"; };
 		EBA251AC2B7240B40040DD08 /* QRScanner+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QRScanner+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -301,10 +307,29 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		EB8E02DB2B6FDBDB0056182B /* Components */ = {
+		EB8D83E62B72C085000FB55A /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				EB8E02DC2B6FDBFE0056182B /* TaskItemDetailViewComponents.swift */,
+				EB8D83E22B72BDBF000FB55A /* TaskItemComponents.swift */,
+				EB8D83E42B72BEC7000FB55A /* HomeScreenComponents.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EB8D83E72B72C555000FB55A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EB8D83E82B72C568000FB55A /* CommonComponents.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EB8E02DB2B6FDBDB0056182B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EB8D83E72B72C555000FB55A /* Common */,
+				EB8D83E62B72C085000FB55A /* Home */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -380,12 +405,14 @@
 			files = (
 				EB5888FB2B6BBB7E00F679C5 /* ImageEnums.swift in Sources */,
 				EB5889242B6C4C3200F679C5 /* SpaceSize.swift in Sources */,
+				EB8D83E92B72C568000FB55A /* CommonComponents.swift in Sources */,
 				EB58892C2B6C4ED100F679C5 /* FontSize.swift in Sources */,
 				EB75FCA72B6ECEE400299C13 /* TableView+Extension.swift in Sources */,
 				EB5889192B6C280600F679C5 /* HomeScreenViewModel.swift in Sources */,
 				EBA251AD2B7240B40040DD08 /* QRScanner+Extension.swift in Sources */,
 				EB3679A82B6AA4720015E5BD /* AppDelegate.swift in Sources */,
 				EB58890D2B6C162A00F679C5 /* Endpoint.swift in Sources */,
+				EB8D83E52B72BEC7000FB55A /* HomeScreenComponents.swift in Sources */,
 				EB5889102B6C1D7700F679C5 /* TaskModel.swift in Sources */,
 				EB5889162B6C274B00F679C5 /* TaskItemView.swift in Sources */,
 				EB3679AA2B6AA4720015E5BD /* SceneDelegate.swift in Sources */,
@@ -401,6 +428,7 @@
 				EB58891D2B6C462C00F679C5 /* NetworkConstants.swift in Sources */,
 				EB5889032B6C087A00F679C5 /* HomeScreenViewController.swift in Sources */,
 				EB5889132B6C237D00F679C5 /* UIColor+Extension.swift in Sources */,
+				EB8D83E32B72BDBF000FB55A /* TaskItemComponents.swift in Sources */,
 				EB58892E2B6C57E600F679C5 /* UIFont+Extension.swift in Sources */,
 				EB16F3EA2B71068C00BB1E18 /* AppConstants.swift in Sources */,
 				EB58891F2B6C470C00F679C5 /* LoginConstants.swift in Sources */,

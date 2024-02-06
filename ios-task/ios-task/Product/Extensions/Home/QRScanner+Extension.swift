@@ -16,7 +16,6 @@ extension HomeScreenViewController: AVCaptureMetadataOutputObjectsDelegate, UIIm
             if let qrCode = metadataObject as? AVMetadataMachineReadableCodeObject,
                 qrCode.type == .qr,
                 let stringValue = qrCode.stringValue {
-                print("Detected QR code: \(stringValue)")
                 searchBar.text = stringValue
                 handleSearch(with: stringValue)
                 search(shouldShow: true)
@@ -48,7 +47,7 @@ extension HomeScreenViewController: AVCaptureMetadataOutputObjectsDelegate, UIIm
                 search(shouldShow: true)
                 searchBar.becomeFirstResponder()
             } else {
-                print("No QR code found in the image.")
+                showError(message: AppConstants.noQR)
             }
         }
     }

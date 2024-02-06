@@ -24,10 +24,7 @@ extension HomeScreenViewController: UITableViewDataSource, UITableViewDelegate, 
     
     func showError(message: String) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
+            self.present(CommonComponents.commonAlert(message), animated: true, completion: nil)
         }
     }
     
