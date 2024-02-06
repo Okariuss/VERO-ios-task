@@ -11,4 +11,5 @@ import UIKit
 struct ThemeFont {
     let headlineFont: UIFont
     let bodyFont: UIFont
+    let subtitleFont: UIFont
 }
