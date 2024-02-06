@@ -100,7 +100,7 @@ class HomeScreenViewController: UIViewController {
 
     
     @objc private func refreshData() {
-        homeViewModel.authenticateAndFetchData()
+        viewModel.authenticateAndFetchData()
     }
     
     func search(shouldShow: Bool) {
