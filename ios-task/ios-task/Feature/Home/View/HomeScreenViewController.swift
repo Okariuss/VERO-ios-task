@@ -14,11 +14,7 @@ class HomeScreenViewController: UIViewController {
     var viewModel: HomeScreenViewModel!
     
     private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = AppConstants.appName
-        label.font = Theme.defaultTheme.themeFont.headlineFont
-        label.textColor = .label
-        return label
+        return HomeScreenComponents.defaultHomeViewLabel(AppConstants.appName)
     }()
     
     private(set) lazy var searchBar = UISearchBar()
@@ -30,20 +26,30 @@ class HomeScreenViewController: UIViewController {
     }()
     
     private let searchButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(ImagePath.search.toSystemImage, for: .normal)
-        button.tintColor = .label
-        return button
+        return HomeScreenComponents.defaultButtonComponent(ImagePath.search.toSystemImage)
     }()
     
     private let scanButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(ImagePath.qr.toSystemImage, for: .normal)
-        button.tintColor = .label
-        return button
+        return HomeScreenComponents.defaultButtonComponent(ImagePath.qr.toSystemImage)
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setDesign()
+        
+    }
+    
+    private func setDesign() {
+        
+        configureNavigationBar()
+        
+        tableViewDesign()
+        
+        configureConstraints()
+        
+        viewModelOperation()
+    }
     
     private func configureNavigationBar() {
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
@@ -52,6 +58,42 @@ class HomeScreenViewController: UIViewController {
         
         searchBar.sizeToFit()
         searchBar.delegate = self
+    }
+    
+    private func tableViewDesign() {
+        view.addSubview(tableView)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(TaskItemView.self, forCellReuseIdentifier: CellIdentifiers.taskItemView.rawValue)
+        tableView.refreshControl = refreshControl()
+    }
+    
+    private func configureConstraints() {
+        
+        let tableViewConstraints = [
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(tableViewConstraints)
+    }
+    
+    private func viewModelOperation() {
+        viewModel = HomeScreenViewModel()
+        viewModel.delegate = self
+        viewModel.authenticateAndFetchData()
+    }
+    
+    private func refreshControl() -> UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        return refreshControl
+    }
+    
+    @objc private func refreshData() {
+        viewModel.authenticateAndFetchData()
     }
     
     func showSearchBarButton(shouldShow: Bool) {
@@ -74,17 +116,17 @@ class HomeScreenViewController: UIViewController {
     @objc private func scanButtonTapped() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { _ in
+        let cameraAction = UIAlertAction(title: AppConstants.takePhoto, style: .default) { _ in
             self.presentImagePicker(sourceType: .camera)
         }
         alertController.addAction(cameraAction)
         
-        let galleryAction = UIAlertAction(title: "Choose from Gallery", style: .default) { _ in
+        let galleryAction = UIAlertAction(title: AppConstants.chooseGallery, style: .default) { _ in
             self.presentImagePicker(sourceType: .photoLibrary)
         }
         alertController.addAction(galleryAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: AppConstants.cancel, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
@@ -97,11 +139,6 @@ class HomeScreenViewController: UIViewController {
         imagePickerController.allowsEditing = false
         present(imagePickerController, animated: true, completion: nil)
     }
-
-    
-    @objc private func refreshData() {
-        viewModel.authenticateAndFetchData()
-    }
     
     func search(shouldShow: Bool) {
         showSearchBarButton(shouldShow: !shouldShow)
@@ -112,31 +149,26 @@ class HomeScreenViewController: UIViewController {
     func setupQRScanner() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            print("Camera access authorized")
             startCaptureSession()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 if granted {
                     DispatchQueue.main.async {
-                        print("Camera access granted")
                         self?.startCaptureSession()
                     }
                 } else {
-                    print("Camera access denied")
-                    // Handle access denied
+                    self?.showError(message: AppConstants.cameraAccessDenied)
                 }
             }
         default:
-            print("Camera access denied")
-            // Handle access denied
+            showError(message: AppConstants.cameraAccessDenied)
             break
         }
     }
 
     private func startCaptureSession() {
         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
-            print("No camera available")
-            // Handle no camera
+            showError(message: AppConstants.noCamera)
             return
         }
 
@@ -154,60 +186,7 @@ class HomeScreenViewController: UIViewController {
             captureSession.startRunning()
 
         } catch {
-            print("Error starting capture session: \(error)")
-            // Handle error
+            showError(message: AppConstants.noCamera)
         }
-    }
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setDesign()
-        
-    }
-    
-    private func setDesign() {
-        
-        configureNavigationBar()
-        
-        tableViewDesign()
-        
-        configureConstraints()
-        
-        viewModelOperation()
-    }
-    
-    private func refreshControl() -> UIRefreshControl {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        return refreshControl
-    }
-    
-    private func tableViewDesign() {
-
-        view.addSubview(tableView)
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(TaskItemView.self, forCellReuseIdentifier: CellIdentifiers.taskItemView.rawValue)
-        tableView.refreshControl = refreshControl()
-    }
-    
-    private func viewModelOperation() {
-        viewModel = HomeScreenViewModel()
-        viewModel.delegate = self
-        viewModel.authenticateAndFetchData()
-    }
-    
-    private func configureConstraints() {
-        
-        let tableViewConstraints = [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(tableViewConstraints)
     }
 }

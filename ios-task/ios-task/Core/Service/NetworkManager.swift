@@ -6,16 +6,20 @@
 //
 
 import Foundation
-import SystemConfiguration.CaptiveNetwork
+import Network
 
 class NetworkManager {
     
     static let shared = NetworkManager()
 
-    private init() {}
+    private let monitor = NWPathMonitor()
+    
+    private init() {
+        startMonitoring()
+    }
     
     var isConnected: Bool {
-        return isConnectedToWiFi()
+        return isConnectedToWiFi
     }
     
     func request(endpoint: Endpoint, completion: @escaping (Data?, Error?) -> Void) {
@@ -29,16 +33,19 @@ class NetworkManager {
         dataTask.resume()
     }
     
-    private func isConnectedToWiFi() -> Bool {
-        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
-            for interface in interfaces {
-                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
-                    if let ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String, !ssid.isEmpty {
-                        return true
-                    }
-                }
-            }
+    private var isConnectedToWiFi: Bool = false {
+        didSet {
+            print("Wi-Fi connection status changed: \(isConnectedToWiFi)")
         }
-        return false
+    }
+    
+    private func startMonitoring() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
+            self.isConnectedToWiFi = path.usesInterfaceType(.wifi)
+        }
+            
+        let queue = DispatchQueue(label: "NetworkMonitor")
+        monitor.start(queue: queue)
     }
 }

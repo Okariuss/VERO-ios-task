@@ -27,14 +27,22 @@ class HomeScreenViewModel {
     }
     
     func authenticateAndFetchData() {
-        if let authToken = CacheItem<String>(cacheItem: .token).readData {
-            if isTokenExpired(authToken) {
-                loginAndFetchData()
+        print(networkManager.isConnected)
+        if networkManager.isConnected {
+            if let authToken = CacheItem<String>(cacheItem: .token).readData {
+                if isTokenExpired(authToken) {
+                    loginAndFetchData()
+                } else {
+                    fetchData(authToken: authToken)
+                }
             } else {
-                fetchTasksFromUserDefaults()
+                loginAndFetchData()
             }
         } else {
-            loginAndFetchData()
+            DispatchQueue.main.async {
+                self.delegate?.showError(message: NetworkConstants.noInternet)
+                self.fetchTasksFromUserDefaults()
+            }
         }
     }
     
@@ -45,7 +53,7 @@ class HomeScreenViewModel {
 
         let currentDate = Date()
         
-        let fiveMinutesInSeconds: TimeInterval = 5 * 60
+        let fiveMinutesInSeconds: TimeInterval = 300
         let expirationDateWithBuffer = tokenExpirationDate.addingTimeInterval(fiveMinutesInSeconds)
         
         return currentDate > expirationDateWithBuffer
@@ -59,8 +67,7 @@ class HomeScreenViewModel {
             guard let self = self else { return }
 
             if let error = error {
-                print("Login Error: \(error)")
-                self.delegate?.showError(message: "Failed to login. Please try again")
+                self.delegate?.showError(message: NetworkConstants.loginError + " \(error)")
             } else if let data = data {
                     
                 if let authToken = self.parseAuthToken(from: data) {
@@ -78,7 +85,6 @@ class HomeScreenViewModel {
             guard let self = self else { return }
 
             if let error = error {
-                print("Fetch Data Error: \(error)")
                 self.delegate?.showError(message: NetworkConstants.failFetchData)
                 self.fetchTasksFromUserDefaults()
             } else if let data = data {
@@ -98,10 +104,9 @@ class HomeScreenViewModel {
     private func fetchTasksFromUserDefaults() {
         if let savedData = CacheItem<Data>(cacheItem: .savedTasks).readData {
             tasks = parseTasks(from: savedData)
-            print(savedData)
             delegate?.didUpdateTasks()
         } else {
-            delegate?.showError(message: "No data available")
+            delegate?.showError(message: AppConstants.noData)
         }
     }
     
@@ -142,7 +147,7 @@ class HomeScreenViewModel {
     private func loadTaskFromUserDefaults() {
         if let savedData = CacheItem<Data>(cacheItem: .savedTasks).readData {
             tasks = parseTasks(from: savedData)
-            print(savedData)
+            delegate?.endRefreshing()
             
         }
     }

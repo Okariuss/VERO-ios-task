@@ -10,27 +10,15 @@ import UIKit
 class TaskItemView: UITableViewCell {
     
     private let taskLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Theme.defaultTheme.themeFont.headlineFont
-        label.numberOfLines = 0
-        return label
+        return TaskItemComponents.defaultLabelComponent(Theme.defaultTheme.themeFont.headlineFont)
     }()
 
     private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Theme.defaultTheme.themeFont.bodyFont
-        label.numberOfLines = 0
-        return label
+        return TaskItemComponents.defaultLabelComponent(Theme.defaultTheme.themeFont.bodyFont)
     }()
 
     private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Theme.defaultTheme.themeFont.subtitleFont
-        label.numberOfLines = 0
-        return label
+        return TaskItemComponents.defaultLabelComponent(Theme.defaultTheme.themeFont.subtitleFont)
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
