@@ -27,14 +27,32 @@ class HomeScreenViewModel {
     }
     
     func authenticateAndFetchData() {
-        if let authToken = CacheItems.token.readString {
-            fetchData(authToken: authToken)
+        if let authToken = CacheItem<String>(cacheItem: .token).readData {
+            if isTokenExpired(authToken) {
+                loginAndFetchData()
+            } else {
+                fetchTasksFromUserDefaults()
+            }
         } else {
             loginAndFetchData()
         }
     }
+    
+    private func isTokenExpired(_ authToken: String) -> Bool {
+        guard let tokenExpirationDate = CacheItem<Date>(cacheItem: .tokenExpiration).readData else {
+            return true
+        }
 
-    func loginAndFetchData() {
+        let currentDate = Date()
+        
+        let fiveMinutesInSeconds: TimeInterval = 5 * 60
+        let expirationDateWithBuffer = tokenExpirationDate.addingTimeInterval(fiveMinutesInSeconds)
+        
+        return currentDate > expirationDateWithBuffer
+    }
+
+    
+    private func loginAndFetchData() {
         let loginEndpoint = Endpoint.login
 
         networkManager.request(endpoint: loginEndpoint) { [weak self] data, error in
@@ -45,8 +63,8 @@ class HomeScreenViewModel {
                 self.delegate?.showError(message: "Failed to login. Please try again")
             } else if let data = data {
                     
-                if let authToken = parseAuthToken(from: data) {
-                    CacheItems.token.writeString(authToken)
+                if let authToken = self.parseAuthToken(from: data) {
+                    CacheItem<String>(cacheItem: .token).writeData(authToken)
                     self.fetchData(authToken: authToken)
                 }
             }
@@ -62,6 +80,7 @@ class HomeScreenViewModel {
             if let error = error {
                 print("Fetch Data Error: \(error)")
                 self.delegate?.showError(message: NetworkConstants.failFetchData)
+                self.fetchTasksFromUserDefaults()
             } else if let data = data {
                 let decodedTasks = parseTasks(from: data)
 
@@ -73,6 +92,16 @@ class HomeScreenViewModel {
                     self.saveTasksToUserDefaults()
                 }
             }
+        }
+    }
+    
+    private func fetchTasksFromUserDefaults() {
+        if let savedData = CacheItem<Data>(cacheItem: .savedTasks).readData {
+            tasks = parseTasks(from: savedData)
+            print(savedData)
+            delegate?.didUpdateTasks()
+        } else {
+            delegate?.showError(message: "No data available")
         }
     }
     
@@ -92,7 +121,6 @@ class HomeScreenViewModel {
         }
     }
 
-
     private func parseTasks(from data: Data) -> Task {
         do {
             let decoder = JSONDecoder()
@@ -107,13 +135,15 @@ class HomeScreenViewModel {
     private func saveTasksToUserDefaults() {
         let encoder = JSONEncoder()
         if let encodedData = try? encoder.encode(tasks) {
-            CacheItems.savedTasks.writeData(encodedData)
+            CacheItem<Data>(cacheItem: .savedTasks).writeData(encodedData)
         }
     }
     
     private func loadTaskFromUserDefaults() {
-        if let savedData = CacheItems.savedTasks.readData {
+        if let savedData = CacheItem<Data>(cacheItem: .savedTasks).readData {
             tasks = parseTasks(from: savedData)
+            print(savedData)
+            
         }
     }
 

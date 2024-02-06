@@ -9,30 +9,29 @@ import Foundation
 
 enum CacheItems {
     case token
+    case tokenExpiration
     case savedTasks
     
     var key: String {
         switch self {
         case .token:
             return "token"
+        case .tokenExpiration:
+            return "tokenExpiration"
         case .savedTasks:
             return "savedTasks"
         }
     }
+}
+
+struct CacheItem<T> {
+    let cacheItem: CacheItems
     
-    var readString: String? {
-        return UserDefaults.standard.string(forKey: key)
+    func writeData(_ data: T) {
+        UserDefaults.standard.set(data, forKey: cacheItem.key)
     }
     
-    func writeString(_ string: String?) {
-        UserDefaults.standard.set(string, forKey: key)
-    }
-    
-    var readData: Data? {
-        return UserDefaults.standard.data(forKey: key)
-    }
-    
-    func writeData(_ data: Data?) {
-        UserDefaults.standard.set(data, forKey: key)
+    var readData: T? {
+        return UserDefaults.standard.value(forKey: cacheItem.key) as? T
     }
 }
