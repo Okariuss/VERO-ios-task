@@ -1,75 +1,61 @@
-Hello dear iOS dev prospect!
+# VERO iOS Task
 
-This repository is supposed to act as a playground for your submission.
-Before getting started, please make sure to use this repository as a template on which you will commit and push your code regularly. Once you are ready, please mail us back the link to your repository. 
+This iOS application is a task given to me as part of the hiring process. The task aims to evaluate the my coding skills in iOS development.
 
-Below, you will find the **Task** definition. Happy Hacking :computer: and Good Luck :shamrock:
+## Features
 
-# Task
+- Authentication
+  - Token Handling
+    - Parsed the access token from the response JSON object.
+    - Stored the access token securely in the UserDefaults.
+  - Token Expiry Handling
+    - Implemented logic to handle token expiry and refresh if necessary.
+    - Automatically refreshed the token when it expires to ensure uninterrupted access to the API.
+- Remote API Integration
+  - Connected to the remote API located at https://api.baubuddy.de/dev/index.php/v1/tasks/select
+  - Fetched resources from the API.
+- Offline Mode Support
+  - Checked Wi-Fi status using NWPathMonitor
+  - Implemented UserDefaults to store fetched resources
+- List Display
+  - Displayed fetched resources in a list format with grouped by items parent ID
+  - Showed Task, Task Title and Task Description in a list with given color code
+- QR Code Scanning
+  - Integrated a QR Code Scanner using AVFoundation
+  - You can scan QR using camera or gallery
+- Search/Filtering
+  - Implemented a search bar allowing users to search for tasks based on all of the properties on JSON with alphabetically
+  - Automatically setted the search query to the scanned text upon successful QR code scan.
+- Pull-2-Refresh
+  - Implemented pull-to-refresh functionality to allow users to manually refresh the data from the remote API.
 
-Write a iOS application that connects to a remote API, downloads a certain set of resources, shows them in a list and provides some basic searching/filtering feature-set.
-In particular, the app should:
+## Screens
 
-- Request the resources located at `https://api.baubuddy.de/dev/index.php/v1/tasks/select` 
-- Store them in an appropriate data structure that allows using the application offline
-- Display all items in a list showing `task`, `title`, `description` and `colorCode` (which should be a view colored according to `colorCode`)
-- The app should offer a search bar that allows searching for any of the class properties (even those, that are not visible to the user directly)
-- The app should offer a menu item that allows scanning for QR-Codes
-  - Upon successful scan, the search query should be set to the scanned text
-- In order to refresh the data, the app should offer a pull-2-refresh functionality
+<p align="center">
+  <img src="./Images/Pull_2_Refresh.png" alt="Refresh" width="200" />
+  <img src="./Images/Scan_QR.png" alt="Scan QR" width="200" />
+  <img src="./Images/Search.png" alt="Search" width="200" />
+</p>
+
+## Technologies Used
+
+- MVVM Pattern
+- UIKit
+- UserDefaults
+- AVFoundation
+- Network
+- NWPathMonitor
   
+### Installation
 
-### Authorization
-
-It's mandatory for your requests towers the API to be authorized. You can find the required request below:
-
-This is how it looks in `curl`:
-
-```bash
-curl --request POST \
-  --url https://api.baubuddy.de/index.php/login \
-  --header 'Authorization: Basic QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz' \
-  --header 'Content-Type: application/json' \
-  --data '{
-        "username":"365",
-        "password":"1"
-}'
+1. Clone the repository.
 ```
-
-The response will contain a json object, having the access token in `json["oauth"]["access_token"]`. For all subsequent calls this has to be added to the request headers as `Authorization: Bearer {access_token}`.
-
-A possible implementation in `Swift` could be the following. You don't have to copy over this one, feel free to indivualize it or use a different network library.
-
-```swift
-import Foundation
-
-let headers = [
-  "Authorization": "Basic QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz",
-  "Content-Type": "application/json"
-]
-let parameters = [
-  "username": "365",
-  "password": "1"
-] as [String : Any]
-
-let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
-
-let request = NSMutableURLRequest(url: NSURL(string: "https://api.baubuddy.de/index.php/login")! as URL,
-                                        cachePolicy: .useProtocolCachePolicy,
-                                    timeoutInterval: 10.0)
-request.httpMethod = "POST"
-request.allHTTPHeaderFields = headers
-request.httpBody = postData as Data
-
-let session = URLSession.shared
-let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-  if (error != nil) {
-    print(error)
-  } else {
-    let httpResponse = response as? HTTPURLResponse
-    print(httpResponse)
-  }
-})
-
-dataTask.resume()
+  git clone https://github.com/Okariuss/VERO-ios-task.git
 ```
+2. Open the project in Xcode.
+3. Build and run the project in the Xcode simulator or on a physical device.
+
+---
+
+Happy coding! 🚀
+
